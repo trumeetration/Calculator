@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
 
 namespace Calculator
@@ -106,6 +107,18 @@ namespace Calculator
             {
                 TextValue += x;
             }, x => !TextValue.Contains(x));
+        }
+
+        private ICommand _clear;
+        public ICommand Clear
+        {
+            get => _clear ?? new RelayCommand(() =>
+            {
+                TextValue = "0";
+                lastValue = null;
+                op = null;
+                IsFinished = false;
+            }, () => true);
         }
     }
 }

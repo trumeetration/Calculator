@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
         Title="MainWindow" Height="500" Width="350">
-    <Grid Background="FloralWhite" Margin="10, 20, 10, 10">
+    <Grid Background="FloralWhite" Margin="10, 10, 10, 10">
         <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
@@ -20,33 +21,35 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="4" Text="{Binding TextValue}" Margin="5" FontSize="60" Background="Aquamarine"
-                   Style="{StaticResource TextBlockStyle}"/>
-        <Button Grid.Column="0" Grid.Row="1" Margin="5" Content="7" Command="{Binding AddDigit}"
+        <Button Grid.Row="0" Grid.Column="3" Content="Clear" Command="{Binding Clear}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="1" Grid.Row="1" Margin="5" Content="8" Command="{Binding AddDigit}"
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding TextValue}" Margin="5" FontSize="60" Background="Aquamarine"
+                Style="{StaticResource TextBlockStyle}"/>
+        <Button Grid.Column="0" Grid.Row="2" Margin="5" Content="7" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="2" Grid.Row="1" Margin="5" Content="9" Command="{Binding AddDigit}"
+        <Button Grid.Column="1" Grid.Row="2" Margin="5" Content="8" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="0" Grid.Row="2" Margin="5" Content="4" Command="{Binding AddDigit}"
+        <Button Grid.Column="2" Grid.Row="2" Margin="5" Content="9" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="1" Grid.Row="2" Margin="5" Content="5" Command="{Binding AddDigit}"
+        <Button Grid.Column="0" Grid.Row="3" Margin="5" Content="4" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="2" Grid.Row="2" Margin="5" Content="6" Command="{Binding AddDigit}"
+        <Button Grid.Column="1" Grid.Row="3" Margin="5" Content="5" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="0" Grid.Row="3" Margin="5" Content="1" Command="{Binding AddDigit}"
+        <Button Grid.Column="2" Grid.Row="3" Margin="5" Content="6" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="1" Grid.Row="3" Margin="5" Content="2" Command="{Binding AddDigit}"
+        <Button Grid.Column="0" Grid.Row="4" Margin="5" Content="1" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="2" Grid.Row="3" Margin="5" Content="3" Command="{Binding AddDigit}"
+        <Button Grid.Column="1" Grid.Row="4" Margin="5" Content="2" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="0" Grid.Row="4" Margin="5" Content="0" Command="{Binding AddDigit}"
+        <Button Grid.Column="2" Grid.Row="4" Margin="5" Content="3" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="1" Grid.Row="4" Margin="5" Content=","  Command="{Binding Comma}"
+        <Button Grid.Column="0" Grid.Row="5" Margin="5" Content="0" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Button Grid.Column="2" Grid.Row="4" Margin="5" Content="=" Command="{Binding RenderExpression}"
+        <Button Grid.Column="1" Grid.Row="5" Margin="5" Content=","  Command="{Binding Comma}"
                 Style="{StaticResource ButtonStyle}"/>
-        <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="4">
+        <Button Grid.Column="2" Grid.Row="5" Margin="5" Content="=" Command="{Binding RenderExpression}"
+                Style="{StaticResource ButtonStyle}"/>
+        <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="4">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
