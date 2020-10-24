@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
         Title="Calculator" Height="500" Width="350">
-    <Grid Background="FloralWhite" Margin="10, 10, 10, 10">
+    <Grid Background="FloralWhite" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
             <RowDefinition Height="80"/>
