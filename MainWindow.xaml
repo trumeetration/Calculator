@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="500" Width="350">
+        Title="Calculator" Height="500" Width="650">
     <Grid Background="FloralWhite" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -20,8 +20,10 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
-        <Button Grid.Row="0" Grid.Column="3" Content="Clear" Command="{Binding Clear}"
+
+        <Button Grid.Row="0" Grid.Column="3" Margin="5, 0" Content="Clear" Command="{Binding Clear}"
                 Style="{StaticResource ButtonStyle}"/>
         <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding TextValue}" Margin="5" FontSize="60" Background="Aquamarine"
                 Style="{StaticResource TextBlockStyle}"/>
@@ -68,6 +70,14 @@
             <Button Grid.Row="4" Margin="5" Content="+" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
         </Grid>
+        <ListView Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ItemsSource="{Binding Expressions}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Выражение" Width="220" DisplayMemberBinding="{Binding expression}"/>
+                    <GridViewColumn Header="Значение" Width="67" DisplayMemberBinding="{Binding answer}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
     </Grid>
-    
+
 </Window>

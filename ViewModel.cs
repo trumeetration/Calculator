@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -14,7 +16,9 @@ namespace Calculator
     {
         private static string lastValue = null;
         private static string op = null;
-        private static bool IsFinished = false;
+        private static bool hasNumberComma = false;
+        private static char[] delimiterChars = { '+', '-', '*', '/' };
+        private ObservableCollection<Expression> _observableprsn = new ObservableCollection<Expression>();
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -33,6 +37,7 @@ namespace Calculator
                 OnPropertyChanged(nameof(TextValue));
             }
         }
+
         private ICommand _addDigit;
         public ICommand AddDigit
         {
@@ -43,14 +48,20 @@ namespace Calculator
                     if (TextValue.Length == 0)
                         return;
                     TextValue = TextValue.Remove(TextValue.Length - 1);
+                    string[] values = TextValue.Split(delimiterChars);
+                    if (values.Length > 0)
+                        hasNumberComma = values[values.Length - 1].Contains(',') ? true : false;
                     return;
                 }
                 if (TextValue.Length > 1 && "*/-+".IndexOf(TextValue[TextValue.Length - 1]) != -1 && "*/-+".IndexOf(x) != -1)
                 {
                     TextValue = TextValue.Remove(TextValue.Length - 1) + x;
+                    hasNumberComma = false;
                     return;
                 }
                 TextValue += x;
+                if ("-+*/".IndexOf(x) != -1)
+                    hasNumberComma = false;
             }, x => true);
         }
 
@@ -59,7 +70,10 @@ namespace Calculator
         {
             get => _renderExpression ?? new RelayCommand<string>(x =>
             {
-                TextValue =  Convert.ToString(Calc.Parse(TextValue));
+                var result = Convert.ToString(Calc.Parse(TextValue));
+                Expression tmp = new Expression(TextValue, result);
+                Expressions.Add(tmp); //todo : FIX
+                TextValue = result;
             }, x => true);
         }
         private ICommand _comma;
@@ -68,7 +82,8 @@ namespace Calculator
             get => _comma ?? new RelayCommand<string>(x =>
             {
                 TextValue += x;
-            }, x => /*!TextValue.Contains(x)*/true);
+                hasNumberComma = true;
+            }, x => hasNumberComma == false);
         }
 
         private ICommand _clear;
@@ -79,9 +94,23 @@ namespace Calculator
                 TextValue = "";
                 lastValue = null;
                 op = null;
-                IsFinished = false;
             }, () => true);
         }
+
+        private ObservableCollection<Expression> _expr { get; set; }
+        public ObservableCollection<Expression> Expressions
+        {
+            get => _expr;
+            set
+            {
+                if (_expr != value)
+                {
+                    _expr = value;
+                    OnPropertyChanged(nameof(Expressions));
+                }
+            }
+        }
+
     }
 
     public static class Calc
@@ -178,5 +207,18 @@ namespace Calculator
             }
             return total;
         }
+    }
+
+    public class Expression
+    {
+        private string expression;
+        private string value;
+        public Expression(string exp, string answ)
+        {
+            expression = exp;
+            value = answ;
+        }
+
+
     }
 }
