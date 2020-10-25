@@ -59,13 +59,13 @@
             </Grid.RowDefinitions>
             <Button Grid.Row="0" Margin="5" Content="Back" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Row="1" Margin="5" Content="/" Command="{Binding RenderExpression}"
+            <Button Grid.Row="1" Margin="5" Content="/" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Row="2" Margin="5" Content="*" Command="{Binding RenderExpression}"
+            <Button Grid.Row="2" Margin="5" Content="*" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Row="3" Margin="5" Content="-" Command="{Binding RenderExpression}"
+            <Button Grid.Row="3" Margin="5" Content="-" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Row="4" Margin="5" Content="+" Command="{Binding RenderExpression}"
+            <Button Grid.Row="4" Margin="5" Content="+" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
         </Grid>
     </Grid>
