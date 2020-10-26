@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="500" Width="650">
+        Title="Calculator" Height="500" Width="650"
+        d:DataContext="{d:DesignInstance local:ViewModel}">
     <Grid Background="FloralWhite" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
@@ -70,14 +71,16 @@
             <Button Grid.Row="4" Margin="5" Content="+" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
         </Grid>
-        <ListView Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ItemsSource="{Binding Expressions}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Выражение" Width="220" DisplayMemberBinding="{Binding expression}"/>
-                    <GridViewColumn Header="Значение" Width="67" DisplayMemberBinding="{Binding answer}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ItemsSource="{Binding Expressions}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type Expression}">
+                    <DockPanel>
+                        <TextBox Width="220" Text="{Binding Exp, Mode=OneWay}"/>
+                        <TextBox Width="67" Text="{Binding Value, Mode=OneWay}"/>
+                    </DockPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 
 </Window>

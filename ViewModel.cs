@@ -14,11 +14,14 @@ namespace Calculator
 {
     class ViewModel : INotifyPropertyChanged
     {
+        public ViewModel()
+        {
+            _expr = new ObservableCollection<Expression>();
+        }
         private static string lastValue = null;
         private static string op = null;
         private static bool hasNumberComma = false;
         private static char[] delimiterChars = { '+', '-', '*', '/' };
-        private ObservableCollection<Expression> _observableprsn = new ObservableCollection<Expression>();
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -97,18 +100,10 @@ namespace Calculator
             }, () => true);
         }
 
-        private ObservableCollection<Expression> _expr { get; set; }
+        private ObservableCollection<Expression> _expr;
         public ObservableCollection<Expression> Expressions
         {
             get => _expr;
-            set
-            {
-                if (_expr != value)
-                {
-                    _expr = value;
-                    OnPropertyChanged(nameof(Expressions));
-                }
-            }
         }
 
     }
@@ -211,14 +206,14 @@ namespace Calculator
 
     public class Expression
     {
-        private string expression;
-        private string value;
         public Expression(string exp, string answ)
         {
-            expression = exp;
-            value = answ;
+            Exp = exp;
+            Value = answ;
         }
 
+        public string Value { get; }
 
+        public string Exp { get; }
     }
 }
