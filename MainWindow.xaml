@@ -75,8 +75,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type Expression}">
                     <DockPanel>
-                        <TextBox Width="220" Text="{Binding Exp, Mode=OneWay}"/>
-                        <TextBox Width="67" Text="{Binding Value, Mode=OneWay}"/>
+                        <TextBox IsReadOnly="True" Width="220" Text="{Binding Exp, Mode=OneWay}"/>
+                        <TextBox IsReadOnly="True" Width="67" Text="{Binding Value, Mode=OneWay}"/>
                     </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
