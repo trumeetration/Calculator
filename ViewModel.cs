@@ -17,6 +17,7 @@ namespace Calculator
         public ViewModel()
         {
             _expr = new ObservableCollection<Expression>();
+            _mem = new ObservableCollection<string>();
         }
         private static string lastValue = null;
         private static string op = null;
@@ -39,6 +40,27 @@ namespace Calculator
                 textValue = value;
                 OnPropertyChanged(nameof(TextValue));
             }
+        }
+
+        private ICommand _toMemory;
+        public ICommand AddToMemory
+        {
+            get => _toMemory ?? new RelayCommand(
+                () =>
+                {
+                    Memory.Add(TextValue);
+                }, () => TextValue.Length > 0);
+        }
+
+        private ICommand _removeFromMemory;
+
+        public ICommand RemoveFromMemory
+        {
+            get => _removeFromMemory ?? new RelayCommand(
+                () =>
+                {
+                    Memory.RemoveAt(Memory.Count() - 1);
+                }, () => Memory.Any());
         }
 
         private ICommand _addDigit;
@@ -106,6 +128,11 @@ namespace Calculator
             get => _expr;
         }
 
+        private ObservableCollection<string> _mem;
+        public ObservableCollection<string> Memory
+        {
+            get => _mem;
+        }
     }
 
     public static class Calc

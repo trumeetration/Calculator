@@ -26,6 +26,10 @@
 
         <Button Grid.Row="0" Grid.Column="3" Margin="5, 0" Content="Clear" Command="{Binding Clear}"
                 Style="{StaticResource ButtonStyle}"/>
+        <Button Grid.Row="0" Grid.Column="0" Margin="5, 0" Content="M+" Command="{Binding AddToMemory}"
+                Style="{StaticResource ButtonStyle}"/>
+        <Button Grid.Row="0" Grid.Column="1" Margin="5, 0" Content="M-" Command="{Binding RemoveFromMemory}"
+                Style="{StaticResource ButtonStyle}"/>
         <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding TextValue}" Margin="5" FontSize="60" Background="Aquamarine"
                 Style="{StaticResource TextBlockStyle}"/>
         <Button Grid.Column="0" Grid.Row="2" Margin="5" Content="7" Command="{Binding AddDigit}"
@@ -71,16 +75,31 @@
             <Button Grid.Row="4" Margin="5" Content="+" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
         </Grid>
-        <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ItemsSource="{Binding Expressions}">
-            <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type Expression}">
-                    <DockPanel>
-                        <TextBox IsReadOnly="True" Width="220" Text="{Binding Exp, Mode=OneWay}"/>
-                        <TextBox IsReadOnly="True" Width="67" Text="{Binding Value, Mode=OneWay}"/>
-                    </DockPanel>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+        <TabControl Grid.Row="0" Grid.Column="4" Grid.RowSpan="6">
+            <TabItem Header="History">
+                <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Expressions}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type Expression}">
+                            <DockPanel>
+                                <TextBox IsReadOnly="True" Width="180" Text="{Binding Exp, Mode=OneWay}"/>
+                                <TextBox IsReadOnly="True" Width="90" Text="{Binding Value, Mode=OneWay}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Memory">
+                <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Memory}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel>
+                                <TextBox IsReadOnly="True" Width="270" Text="{Binding ., Mode=OneWay}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+        </TabControl>
     </Grid>
 
 </Window>
