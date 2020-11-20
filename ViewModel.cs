@@ -142,9 +142,32 @@ namespace Calculator
         {
             get => _mem;
         }
-        public string Error => throw new NotImplementedException();
 
-        public string this[string columnName] => throw new NotImplementedException();
+        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
+
+        public string Error => null;
+
+        public string this[string name]
+        {
+            get
+            {
+                string errorMessage = null;
+                switch (name)
+                {
+                    case "TextValue":
+                        if (string.IsNullOrWhiteSpace(TextValue))
+                            errorMessage = "Empty field";
+                        break;
+                }
+
+                if (ErrorCollection.ContainsKey(name))
+                    ErrorCollection[name] = errorMessage;
+                else if (errorMessage != null)
+                    ErrorCollection.Add(name, errorMessage);
+                OnPropertyChanged(nameof(ErrorCollection));
+                return errorMessage;
+            }
+        }
     }
 
     public static class Calc

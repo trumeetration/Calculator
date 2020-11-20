@@ -30,8 +30,9 @@
                 Style="{StaticResource ButtonStyle}"/>
         <Button Grid.Row="0" Grid.Column="1" Margin="5, 0" Content="M-" Command="{Binding RemoveFromMemory}"
                 Style="{StaticResource ButtonStyle}"/>
-        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Text="{Binding TextValue}" Margin="5" FontSize="60" Background="Aquamarine"
-                Style="{StaticResource TextBlockStyle}"/>
+        <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0" Text="{Binding TextValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding ErrorCollection[TextValue]}" Margin="5" FontSize="60"
+                   Background="#B67291"
+                   Style="{StaticResource TextBlockStyle}"/>
         <Button Grid.Column="0" Grid.Row="2" Margin="5" Content="7" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
         <Button Grid.Column="1" Grid.Row="2" Margin="5" Content="8" Command="{Binding AddDigit}"
