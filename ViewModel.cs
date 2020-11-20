@@ -12,7 +12,7 @@ using System.Windows.Input;
 
 namespace Calculator
 {
-    class ViewModel : INotifyPropertyChanged
+    class ViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         public ViewModel()
         {
@@ -63,6 +63,15 @@ namespace Calculator
                 }, () => Memory.Any());
         }
 
+        private ICommand _takeExp;
+        public ICommand TakeExpression
+        {
+            get => _takeExp ?? new RelayCommand(() =>
+            {
+                TextValue = Memory[Memory.Count() - 1];
+            }, () => true);
+        }
+
         private ICommand _addDigit;
         public ICommand AddDigit
         {
@@ -97,7 +106,7 @@ namespace Calculator
             {
                 var result = Convert.ToString(Calc.Parse(TextValue));
                 Expression tmp = new Expression(TextValue, result);
-                Expressions.Add(tmp); //todo : FIX
+                Expressions.Add(tmp); 
                 TextValue = result;
             }, x => true);
         }
@@ -133,6 +142,9 @@ namespace Calculator
         {
             get => _mem;
         }
+        public string Error => throw new NotImplementedException();
+
+        public string this[string columnName] => throw new NotImplementedException();
     }
 
     public static class Calc

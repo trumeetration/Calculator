@@ -93,7 +93,8 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel>
-                                <TextBox IsReadOnly="True" Width="270" Text="{Binding ., Mode=OneWay}"/>
+                                <TextBox IsReadOnly="True" Width="200" Text="{Binding ., Mode=OneWay}"/>
+                                <Button Content="Take" Width="70" Margin="5, 0" Command="{Binding TakeExpression}"/>
                             </DockPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
