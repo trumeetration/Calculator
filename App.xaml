@@ -6,8 +6,8 @@
     <Application.Resources>
         <Style x:Key="TextBlockStyle" TargetType="TextBlock">
             <Setter Property="FontFamily" Value="Arial Black"/>
-            <Setter Property="Text" Value="{Binding (local:ViewModel.TextValue), ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
-            <Setter Property="ToolTip" Value="{Binding (local:ViewModel.ErrorCollection)[TextValue]}"/>
+            <Setter Property="Text" Value="{Binding TextValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
+            <Setter Property="ToolTip" Value="{Binding ErrorCollection[TextValue]}"/>
             <Setter Property="Margin" Value="5"/>
             <Setter Property="FontSize" Value="55"/>
             <Setter Property="Background" Value="#B67291"/>
@@ -18,6 +18,7 @@
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource self}, Path=Content}"/>
         </Style>
         <Style x:Key="HeadButtonStyle" TargetType="Button">
+            <Setter Property="FontFamily" Value="Arial Black"/>
             <Setter Property="Margin" Value="5, 0"/>
         </Style>
     </Application.Resources>
