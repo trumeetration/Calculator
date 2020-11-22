@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
 
@@ -131,6 +132,25 @@ namespace Calculator
             }, () => true);
         }
 
+        private ICommand _memoryUnit;
+
+        public ICommand MemoryUnit
+        {
+            get => _memoryUnit ?? new RelayCommand<DockPanel>((x) =>
+            {
+                if (x.Visibility == Visibility.Collapsed)
+                {
+                    x.Visibility = Visibility.Visible;
+                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width += 90;
+                }
+                else
+                {
+                    x.Visibility = Visibility.Collapsed;
+                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width -= 90;
+                }
+            }, (x) => true);
+        }
+
         private ObservableCollection<Expression> _expr;
         public ObservableCollection<Expression> Expressions
         {
@@ -138,6 +158,7 @@ namespace Calculator
         }
 
         private ObservableCollection<string> _mem;
+
         public ObservableCollection<string> Memory
         {
             get => _mem;

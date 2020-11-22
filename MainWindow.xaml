@@ -5,10 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="500" Width="770"
-        d:DataContext="{d:DesignInstance local:ViewModel}">
+        Title="Calculator" Height="500" Width="680"
+        d:DataContext="{d:DesignInstance local:ViewModel}"
+        ResizeMode="NoResize">
     <DockPanel LastChildFill="False">
-        <DockPanel LastChildFill="False" DockPanel.Dock="Left">
+        <DockPanel Name="MemoryPanel" LastChildFill="False" DockPanel.Dock="Left" Visibility="Collapsed" Width="90">
             <Image Source="{StaticResource MetacognitionDrawingImage}" DockPanel.Dock="Top" Margin="0, 20, 0, 0" Height="85" Width="80"></Image>
             <Grid Visibility="Visible" Width="80" VerticalAlignment="Bottom" Margin="0, 0, 0, 25" DockPanel.Dock="Right">
                 <Grid.RowDefinitions>
@@ -40,7 +41,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Content="🡄" Margin="0, 5" FontSize="20"></Button>
+            <Button Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Content="⇔" Command="{Binding MemoryUnit}" CommandParameter="{Binding ElementName=MemoryPanel}" Margin="0, 5" FontSize="20"/>
             <Button Grid.Row="0" Grid.Column="4" Content="Clear" Command="{Binding Clear}"
                 Style="{StaticResource HeadButtonStyle}"/>
             <Button Grid.Row="0" Grid.Column="1" Content="M+" Command="{Binding AddToMemory}"
