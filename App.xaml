@@ -21,5 +21,77 @@
             <Setter Property="FontFamily" Value="Arial Black"/>
             <Setter Property="Margin" Value="5, 0"/>
         </Style>
+        <DrawingImage x:Key="MetacognitionDrawingImage">
+            <DrawingImage.Drawing>
+                <DrawingGroup ClipGeometry="M0,0 V200 H200 V0 H0 Z">
+                    <GeometryDrawing Brush="#FFFFFDFC" Geometry="F1 M200,200z M0,0z M53.717,195.21C59.917,183.168 58.308,150.364 57.467,136.751 57.467,136.751 49.356,129.927 46.841,126.617 42.177,120.471 36.709,111.916 34.368,104.763 31.698,96.6 30.427,84.923 31.14,76.378 31.807,68.403 34.112,57.449 38.529,50.696 43.339,43.345 53.251,35.852 61.161,31.776 69.153,27.655 81.242,24.791 90.258,24.113 99.009,23.462 110.852,25.121 119.356,27.271 129.094,29.733 142.081,34.559 149.835,40.786 168.553,56.736 168.353,77.538 169.694,99.813 171.03,105.103 175.631,111.187 178.93,115.584 180.384,117.513 183.383,119.295 184.473,121.437 185.167,122.792 185.992,124.997 185.395,126.398 184.563,128.368 181.309,129.402 179.397,130.447 178.209,131.097 175.903,131.089 175.237,132.249 173.665,134.988 177.842,139.421 175.932,141.937 174.925,143.255 171.084,143.515 171.084,143.515 171.084,143.515 175.839,149.394 173.855,149.374 172.749,149.356 169.381,154.825 170.161,156.582 170.161,156.582 172.428,161.847 172.465,164.236 172.502,166.893 172.035,170.873 170.161,172.798 168.25,174.751 164.043,174.795 161.382,175.501 157.13,176.624 150.272,175.964 145.682,177.08 142.637,177.82 138.631,179.273 135.979,180.906 134.069,182.084 131.362,183.859 130.438,185.866 127.53,192.146 129.899,189.493 129.057,196.344L53.279,195.551">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF333333" Thickness="5" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing Brush="#FF919899" Geometry="F1 M200,200z M0,0z M88.064,131.7C88.064,131.7 84.75,134.25 83.067,134.719 81.555,135.14 79.295,135.296 77.836,134.719 76.621,134.232 74.659,131.7 74.659,131.7 61.56,134.993 55.212,123.661 54.42,116.872 54.42,116.872 49.838,115.696 47.83,115.485 42.141,114.87 39.223,100.133 39.188,99.261 38.116,73.266 41.645,60.439 58.966,43.418 66.502,36.004 77.854,32.168 94.888,31.6 105.628,31.241 114.621,31.728 121.941,35.536 121.941,35.536 136.939,41.923 142.404,46.198 147.652,50.299 153.325,57.016 157.187,62.88 162.409,74.487 160.347,92.178 148.083,94.16L133.771,96.481C129.701,97.189 139.181,104.941 128.081,111.777 118.88,121.228 108.05,112.767 107.168,113.631 107.168,113.631 103.225,119.302 101.938,121.972 100.696,124.559 99.454,128.22 98.75,131.01 98.209,133.186 99.533,137.304 97.616,138.423 92.97,141.13 88.064,139.341 88.064,138.194L88.064,131.714z">
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF454A4B" Thickness="3" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                        </GeometryDrawing.Pen>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF3D3D3D" Thickness="9" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="158.67,33.725" EndPoint="164.84,26.042" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF3D3D3D" Thickness="9" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="120.42,16.625" EndPoint="123.09,7.14" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF3D3D3D" Thickness="9" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="74.816,15.694" EndPoint="72.694,6.071" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF3D3D3D" Thickness="9" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="25.272,113.92" EndPoint="16.237,117.85" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF3D3D3D" Thickness="9" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="39.878,33.693" EndPoint="33.632,26.072" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF3D3D3D" Thickness="9" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="20.619,67.67" EndPoint="10.891,66.095" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                    <GeometryDrawing>
+                        <GeometryDrawing.Pen>
+                            <Pen Brush="#FF3D3D3D" Thickness="9" StartLineCap="Round" EndLineCap="Round" LineJoin="Miter" MiterLimit="1" />
+                        </GeometryDrawing.Pen>
+                        <GeometryDrawing.Geometry>
+                            <LineGeometry StartPoint="179.97,67.04" EndPoint="189.54,64.725" />
+                        </GeometryDrawing.Geometry>
+                    </GeometryDrawing>
+                </DrawingGroup>
+            </DrawingImage.Drawing>
+        </DrawingImage>
     </Application.Resources>
 </Application>

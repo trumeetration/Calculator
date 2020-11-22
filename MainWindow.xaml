@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
         mc:Ignorable="d"
-        Title="Calculator" Height="500" Width="780"
+        Title="Calculator" Height="500" Width="770"
         d:DataContext="{d:DesignInstance local:ViewModel}">
     <DockPanel LastChildFill="False">
         <Grid Background="FloralWhite" Margin="10" Width="650" DockPanel.Dock="Right">
@@ -18,46 +18,47 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="300"/>
             </Grid.ColumnDefinitions>
-
-            <Button Grid.Row="0" Grid.Column="3" Content="Clear" Command="{Binding Clear}"
+            <Button Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Content="🡄" Margin="0, 5" FontSize="20"></Button>
+            <Button Grid.Row="0" Grid.Column="4" Content="Clear" Command="{Binding Clear}"
                 Style="{StaticResource HeadButtonStyle}"/>
-            <Button Grid.Row="0" Grid.Column="0" Content="M+" Command="{Binding AddToMemory}"
+            <Button Grid.Row="0" Grid.Column="1" Content="M+" Command="{Binding AddToMemory}"
                 Style="{StaticResource HeadButtonStyle}"/>
-            <Button Grid.Row="0" Grid.Column="1" Content="M-" Command="{Binding RemoveFromMemory}"
+            <Button Grid.Row="0" Grid.Column="2" Content="M-" Command="{Binding RemoveFromMemory}"
                 Style="{StaticResource HeadButtonStyle}"/>
-            <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="0"
+            <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="1"
                    Style="{StaticResource TextBlockStyle}"/>
-            <Button Grid.Column="0" Grid.Row="2" Content="7" Command="{Binding AddDigit}"
+            <Button Grid.Column="1" Grid.Row="2" Content="7" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="1" Grid.Row="2" Content="8" Command="{Binding AddDigit}"
+            <Button Grid.Column="2" Grid.Row="2" Content="8" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="2" Grid.Row="2" Content="9" Command="{Binding AddDigit}"
+            <Button Grid.Column="3" Grid.Row="2" Content="9" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="0" Grid.Row="3" Content="4" Command="{Binding AddDigit}"
+            <Button Grid.Column="1" Grid.Row="3" Content="4" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="1" Grid.Row="3" Content="5" Command="{Binding AddDigit}"
+            <Button Grid.Column="2" Grid.Row="3" Content="5" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="2" Grid.Row="3" Content="6" Command="{Binding AddDigit}"
+            <Button Grid.Column="3" Grid.Row="3" Content="6" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="0" Grid.Row="4" Content="1" Command="{Binding AddDigit}"
+            <Button Grid.Column="1" Grid.Row="4" Content="1" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="1" Grid.Row="4" Content="2" Command="{Binding AddDigit}"
+            <Button Grid.Column="2" Grid.Row="4" Content="2" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="2" Grid.Row="4" Content="3" Command="{Binding AddDigit}"
+            <Button Grid.Column="3" Grid.Row="4" Content="3" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="0" Grid.Row="5" Content="0" Command="{Binding AddDigit}"
+            <Button Grid.Column="1" Grid.Row="5" Content="0" Command="{Binding AddDigit}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="1" Grid.Row="5" Content=","  Command="{Binding Comma}"
+            <Button Grid.Column="2" Grid.Row="5" Content=","  Command="{Binding Comma}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Button Grid.Column="2" Grid.Row="5" Content="=" Command="{Binding RenderExpression}"
+            <Button Grid.Column="3" Grid.Row="5" Content="=" Command="{Binding RenderExpression}"
                 Style="{StaticResource ButtonStyle}"/>
-            <Grid Grid.Row="2" Grid.Column="3" Grid.RowSpan="4">
+            <Grid Grid.Row="2" Grid.Column="4" Grid.RowSpan="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
@@ -76,7 +77,7 @@
                 <Button Grid.Row="4"  Content="+" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
             </Grid>
-            <TabControl Grid.Row="0" Grid.Column="4" Grid.RowSpan="6">
+            <TabControl Grid.Row="0" Grid.Column="5" Grid.RowSpan="6">
                 <TabItem Header="History">
                     <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Expressions}">
                         <ListBox.ItemTemplate>
@@ -103,18 +104,20 @@
                 </TabItem>
             </TabControl>
         </Grid>
-        <Grid Visibility="Visible" Width="80" Height="320" Margin="5, 50" DockPanel.Dock="Right">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="80"></RowDefinition>
-                <RowDefinition Height="80"></RowDefinition>
-                <RowDefinition Height="80"></RowDefinition>
-                <RowDefinition Height="80"></RowDefinition>
-            </Grid.RowDefinitions>
-            <Button Grid.Row="0" Content="M+" Margin="5"></Button>
-            <Button Grid.Row="1" Content="M-" Margin="5"></Button>
-            <Button Grid.Row="2" Content="MS" Margin="5"></Button>
-            <Button Grid.Row="3" Content="MC" Margin="5"></Button>
-        </Grid>
+        <DockPanel LastChildFill="False" DockPanel.Dock="Right">
+            <Image Source="{StaticResource MetacognitionDrawingImage}" DockPanel.Dock="Top" Margin="0, 20, 0, 0" Height="85" Width="80"></Image>
+            <Grid Visibility="Visible" Width="80" VerticalAlignment="Bottom" Margin="0, 0, 0, 25" DockPanel.Dock="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="M+" Margin="5"></Button>
+                <Button Grid.Row="1" Content="M-" Margin="5"></Button>
+                <Button Grid.Row="2" Content="MS" Margin="5"></Button>
+                <Button Grid.Row="3" Content="MC" Margin="5"></Button>
+            </Grid>
+        </DockPanel>
     </DockPanel>
-
 </Window>
