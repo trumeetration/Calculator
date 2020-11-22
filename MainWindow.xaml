@@ -8,7 +8,22 @@
         Title="Calculator" Height="500" Width="770"
         d:DataContext="{d:DesignInstance local:ViewModel}">
     <DockPanel LastChildFill="False">
-        <Grid Background="FloralWhite" Margin="10" Width="650" DockPanel.Dock="Right">
+        <DockPanel LastChildFill="False" DockPanel.Dock="Left">
+            <Image Source="{StaticResource MetacognitionDrawingImage}" DockPanel.Dock="Top" Margin="0, 20, 0, 0" Height="85" Width="80"></Image>
+            <Grid Visibility="Visible" Width="80" VerticalAlignment="Bottom" Margin="0, 0, 0, 25" DockPanel.Dock="Right">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                    <RowDefinition Height="80"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" Content="M+" Margin="5"></Button>
+                <Button Grid.Row="1" Content="M-" Margin="5"></Button>
+                <Button Grid.Row="2" Content="MS" Margin="5"></Button>
+                <Button Grid.Row="3" Content="MC" Margin="5"></Button>
+            </Grid>
+        </DockPanel>
+        <Grid Background="FloralWhite" Margin="10" Width="650">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="80"/>
@@ -104,20 +119,5 @@
                 </TabItem>
             </TabControl>
         </Grid>
-        <DockPanel LastChildFill="False" DockPanel.Dock="Right">
-            <Image Source="{StaticResource MetacognitionDrawingImage}" DockPanel.Dock="Top" Margin="0, 20, 0, 0" Height="85" Width="80"></Image>
-            <Grid Visibility="Visible" Width="80" VerticalAlignment="Bottom" Margin="0, 0, 0, 25" DockPanel.Dock="Right">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition Height="80"></RowDefinition>
-                    <RowDefinition Height="80"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button Grid.Row="0" Content="M+" Margin="5"></Button>
-                <Button Grid.Row="1" Content="M-" Margin="5"></Button>
-                <Button Grid.Row="2" Content="MS" Margin="5"></Button>
-                <Button Grid.Row="3" Content="MC" Margin="5"></Button>
-            </Grid>
-        </DockPanel>
     </DockPanel>
 </Window>
