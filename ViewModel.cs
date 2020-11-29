@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -49,6 +50,7 @@ namespace Calculator
             get => _toMemory ?? new RelayCommand(
                 () =>
                 {
+                    Calc.Parse(TextValue);
                     Memory.Add(TextValue);
                 }, () => TextValue.Length > 0);
         }
@@ -62,6 +64,41 @@ namespace Calculator
                 {
                     Memory.RemoveAt(Memory.Count() - 1);
                 }, () => Memory.Any());
+        }
+
+        private ICommand _clearMem;
+
+        public ICommand ClearMemory
+        {
+            get => _clearMem ?? new RelayCommand(() =>
+            {
+                Memory.Clear();
+            }, () => Memory.Any());
+        }
+
+        private ICommand _sumMemCommand;
+
+        public ICommand SumWithLastMem
+        {
+            get => _sumMemCommand ?? new RelayCommand(() =>
+            {
+                var value = Calc.Parse(TextValue);
+                TextValue = Convert.ToString(value);
+                Memory[Memory.Count - 1] =
+                    Convert.ToString(Convert.ToDouble(Memory[Memory.Count - 1]) + value);
+            }, () => string.IsNullOrEmpty(TextValue) == false && Memory.Any());
+        }
+
+        private ICommand _subFromCommand;
+        public ICommand SubFromLastMem
+        {
+            get => _subFromCommand ?? new RelayCommand(() =>
+            {
+                var value = Calc.Parse(TextValue);
+                TextValue = Convert.ToString(value);
+                Memory[Memory.Count - 1] =
+                    Convert.ToString(Convert.ToDouble(Memory[Memory.Count - 1]) - value);
+            }, () => string.IsNullOrEmpty(TextValue) == false && Memory.Any());
         }
 
         private ICommand _takeExp;
@@ -109,7 +146,7 @@ namespace Calculator
                 Expression tmp = new Expression(TextValue, result);
                 Expressions.Add(tmp); 
                 TextValue = result;
-            }, x => true);
+            }, x => string.IsNullOrWhiteSpace(TextValue) == false);
         }
         private ICommand _comma;
         public ICommand Comma
@@ -141,12 +178,12 @@ namespace Calculator
                 if (x.Visibility == Visibility.Collapsed)
                 {
                     x.Visibility = Visibility.Visible;
-                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width += 90;
+                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width += x.Width;
                 }
                 else
                 {
                     x.Visibility = Visibility.Collapsed;
-                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width -= 90;
+                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width -= x.Width;
                 }
             }, (x) => true);
         }
