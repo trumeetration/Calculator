@@ -104,10 +104,10 @@ namespace Calculator
         private ICommand _takeExp;
         public ICommand TakeExpression
         {
-            get => _takeExp ?? new RelayCommand(() =>
+            get => _takeExp ?? new RelayCommand<TextBox>((x) =>
             {
-                TextValue = Memory[Memory.Count() - 1];
-            }, () => true);
+                TextValue = x.Text;
+            }, (x) => true);
         }
 
         private ICommand _addDigit;

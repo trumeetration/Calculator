@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator"
+        Name="MainWin"
         mc:Ignorable="d"
         Title="Calculator" Height="500" Width="680"
         d:DataContext="{d:DesignInstance local:ViewModel}"
@@ -106,9 +107,9 @@
                     <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Memory}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
-                                <DockPanel>
-                                    <TextBox IsReadOnly="True" Width="200" Text="{Binding ., Mode=OneWay}"/>
-                                    <Button Content="Take" Width="70" Margin="5, 0" Command="{Binding TakeExpression}"/>
+                                <DockPanel LastChildFill="False">
+                                    <TextBox IsReadOnly="True" Width="200" Name="MemoryTextBox" Text="{Binding ., Mode=OneWay}"/>
+                                    <Button Content="Take" Width="70" Margin="5, 0" DataContext="{Binding ElementName=MainWin, Path=DataContext}" Command="{Binding TakeExpression}" CommandParameter="{Binding Path=., ElementName=MemoryTextBox}"/>
                                 </DockPanel>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
