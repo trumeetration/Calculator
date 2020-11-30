@@ -11,15 +11,18 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
+using Calculator.Interfaces;
+using Calculator.Models;
 
 namespace Calculator
 {
     class ViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
+        public IMemory Memory { get; }
         public ViewModel()
         {
             _expr = new ObservableCollection<Expression>();
-            _mem = new ObservableCollection<string>();
+            Memory = new MemoryRAM();
         }
         private static string lastValue = null;
         private static string op = null;
@@ -59,11 +62,11 @@ namespace Calculator
 
         public ICommand RemoveFromMemory
         {
-            get => _removeFromMemory ?? new RelayCommand(
-                () =>
-                {
-                    Memory.RemoveAt(Memory.Count() - 1);
-                }, () => Memory.Any());
+            get => _removeFromMemory ?? new RelayCommand<ListBox>((x) =>
+            {
+                MessageBox.Show(x.SelectedIndex.ToString());
+                    Memory.Remove(x.SelectedIndex);
+                }, (x) => Memory.Any());
         }
 
         private ICommand _clearMem;
@@ -84,10 +87,11 @@ namespace Calculator
             {
                 var value = Calc.Parse(TextValue);
                 TextValue = Convert.ToString(value);
-                Memory[Memory.Count - 1] =
-                    Convert.ToString(Convert.ToDouble(Memory[Memory.Count - 1]) + value);
+                Memory.Increase(Memory.Count - 1, TextValue);
             }, () => string.IsNullOrEmpty(TextValue) == false && Memory.Any());
         }
+
+
 
         private ICommand _subFromCommand;
         public ICommand SubFromLastMem
@@ -96,8 +100,7 @@ namespace Calculator
             {
                 var value = Calc.Parse(TextValue);
                 TextValue = Convert.ToString(value);
-                Memory[Memory.Count - 1] =
-                    Convert.ToString(Convert.ToDouble(Memory[Memory.Count - 1]) - value);
+                Memory.Increase(Memory.Count, TextValue);
             }, () => string.IsNullOrEmpty(TextValue) == false && Memory.Any());
         }
 
@@ -192,13 +195,6 @@ namespace Calculator
         public ObservableCollection<Expression> Expressions
         {
             get => _expr;
-        }
-
-        private ObservableCollection<string> _mem;
-
-        public ObservableCollection<string> Memory
-        {
-            get => _mem;
         }
 
         public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();

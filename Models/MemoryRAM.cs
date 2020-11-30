@@ -16,6 +16,11 @@ namespace Calculator.Models
         }
         public ObservableCollection<string> Memory { get; }
 
+        public int Count
+        {
+            get => Memory.Count;
+        }
+
         public void Add(string value)
         {
             Memory.Add(value);
@@ -39,6 +44,11 @@ namespace Calculator.Models
         public void Clear()
         {
             Memory.Clear();
+        }
+
+        public bool Any()
+        {
+            return Memory.Any();
         }
     }
 }

@@ -104,7 +104,7 @@
                     </ListBox>
                 </TabItem>
                 <TabItem Header="Memory">
-                    <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Memory}">
+                    <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Memory.Memory}">
                         <ListBox.ItemTemplate>
                             <DataTemplate>
                                 <DockPanel LastChildFill="False">
