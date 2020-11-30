@@ -56,6 +56,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Interfaces\IMemory.cs" />
+    <Compile Include="Models\Calculator.cs" />
+    <Compile Include="Models\Expression.cs" />
     <Compile Include="Models\MemoryRAM.cs" />
     <Compile Include="RelayCommand.cs" />
     <Compile Include="ViewModel.cs" />

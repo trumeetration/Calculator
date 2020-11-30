@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Calculator.Interfaces;
 using Calculator.Models;
+using Expression = Calculator.Models.Expression;
 
 namespace Calculator
 {
@@ -21,13 +22,12 @@ namespace Calculator
         public IMemory Memory { get; }
         public ViewModel()
         {
+            ErrorDictionary = new Dictionary<string, string>();
             _expr = new ObservableCollection<Expression>();
             Memory = new MemoryRAM();
         }
-        private static string lastValue = null;
-        private static string op = null;
-        private static bool hasNumberComma = false;
-        private static char[] delimiterChars = { '+', '-', '*', '/' };
+        private static bool _hasNumberComma = false;
+        private static char[] _delimiterChars = { '+', '-', '*', '/' };
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged(string propertyName)
@@ -43,6 +43,10 @@ namespace Calculator
             set
             {
                 textValue = value;
+                if (string.IsNullOrWhiteSpace(textValue))
+                    ErrorDictionary[nameof(TextValue)] = "Field is empty";
+                else
+                    ErrorDictionary[nameof(TextValue)] = null;
                 OnPropertyChanged(nameof(TextValue));
             }
         }
@@ -123,20 +127,20 @@ namespace Calculator
                     if (TextValue.Length == 0)
                         return;
                     TextValue = TextValue.Remove(TextValue.Length - 1);
-                    string[] values = TextValue.Split(delimiterChars);
+                    string[] values = TextValue.Split(_delimiterChars);
                     if (values.Length > 0)
-                        hasNumberComma = values[values.Length - 1].Contains(',') ? true : false;
+                        _hasNumberComma = values[values.Length - 1].Contains(',') ? true : false;
                     return;
                 }
                 if (TextValue.Length > 1 && "*/-+".IndexOf(TextValue[TextValue.Length - 1]) != -1 && "*/-+".IndexOf(x) != -1)
                 {
                     TextValue = TextValue.Remove(TextValue.Length - 1) + x;
-                    hasNumberComma = false;
+                    _hasNumberComma = false;
                     return;
                 }
                 TextValue += x;
                 if ("-+*/".IndexOf(x) != -1)
-                    hasNumberComma = false;
+                    _hasNumberComma = false;
             }, x => true);
         }
 
@@ -157,8 +161,8 @@ namespace Calculator
             get => _comma ?? new RelayCommand<string>(x =>
             {
                 TextValue += x;
-                hasNumberComma = true;
-            }, x => hasNumberComma == false);
+                _hasNumberComma = true;
+            }, x => _hasNumberComma == false);
         }
 
         private ICommand _clear;
@@ -167,8 +171,6 @@ namespace Calculator
             get => _clear ?? new RelayCommand(() =>
             {
                 TextValue = "";
-                lastValue = null;
-                op = null;
             }, () => true);
         }
 
@@ -197,139 +199,13 @@ namespace Calculator
             get => _expr;
         }
 
-        public Dictionary<string, string> ErrorCollection { get; private set; } = new Dictionary<string, string>();
+        public Dictionary<string, string> ErrorDictionary { get; private set; }
 
-        public string Error => null;
+        public string this[string columnName] => ErrorDictionary.ContainsKey(columnName) ? ErrorDictionary[columnName] : null;
 
-        public string this[string name]
-        {
-            get
-            {
-                string errorMessage = null;
-                switch (name)
-                {
-                    case "TextValue":
-                        if (string.IsNullOrWhiteSpace(TextValue))
-                            errorMessage = "Empty field";
-                        break;
-                }
-
-                if (ErrorCollection.ContainsKey(name))
-                    ErrorCollection[name] = errorMessage;
-                else if (errorMessage != null)
-                    ErrorCollection.Add(name, errorMessage);
-                OnPropertyChanged(nameof(ErrorCollection));
-                return errorMessage;
-            }
-        }
-    }
-
-    public static class Calc
-    {
-        private static List<double> valueList = new List<double>();
-        private static List<char> operators = new List<char>();
-        public static double Parse(string expression)
-        {
-            valueList.Clear();
-            operators.Clear();
-            expression = expression.Replace(" ", ""); // Удаляет лишние пробелы
-            if (expression.Length == 0)
-                return 0;
-            if ("+-*/".IndexOf(expression[0]) != -1)
-                expression = expression.Insert(0, "0");
-            if ("+-*/".IndexOf(expression[expression.Length - 1]) != -1)
-                expression = expression.Remove(expression.Length - 1);
-            string value = "";
-            double total = 0;
-            char tmpOp = 'n';
-            while (true) // сбор данных 
-            {
-                if (expression.Length == 0)
-                    break;
-                while (expression.Length > 0 && "1234567890".Contains(expression[0]))
-                {
-                    value += expression[0];
-                    expression = expression.Remove(0, 1);
-                }
-                if (value.Length > 0)
-                {
-                    valueList.Add(Convert.ToDouble(value));
-                    value = "";
-                }
-                else break;
-                while (expression.Length > 0 && "+-/*".Contains(expression[0]))
-                {
-                    //operators.Add(expression[0]);
-                    tmpOp = expression[0];
-                    expression = expression.Remove(0, 1);
-                }
-                if (tmpOp == 'n')
-                    break;
-                else
-                {
-                    operators.Add(tmpOp);
-                    tmpOp = 'n';
-                }
-
-            }
-
-            //Высчитывание умножений и делений
-            while (operators.Contains('*') || operators.Contains('/'))
-            {
-                int index = operators.FindIndex(x => x == '*' || x == '/');
-                char op = operators[index];
-                double left = valueList[index];
-                double right = valueList[index + 1];
-                operators.RemoveAt(index);
-                valueList.RemoveRange(index, 2);
-                double result = op == '*' ? left * right : left / right;
-                valueList.Insert(index, result);
-            }
-
-            while (valueList.Count > 0)
-            {
-                if (valueList.Count == 1) return valueList[0];
-                double left = valueList[0];
-                double right = valueList[1];
-                valueList.RemoveRange(0, 2);
-                char op = operators[0];
-                operators.RemoveAt(0);
-                double result = 0;
-                switch (op)
-                {
-                    case '/':
-                        result = left / right;
-                        break;
-                    case '*':
-                        result = left * right;
-                        break;
-                    case '-':
-                        result = left - right;
-                        break;
-                    case '+':
-                        result = left + right;
-                        break;
-                    default:
-                        // Исключение
-                        break;
-                }
-                total = result;
-                valueList.Insert(0, result);
-            }
-            return total;
-        }
-    }
-
-    public class Expression
-    {
-        public Expression(string exp, string answ)
-        {
-            Exp = exp;
-            Value = answ;
-        }
-
-        public string Value { get; }
-
-        public string Exp { get; }
+        public string Error =>
+            ErrorDictionary.Any(x => string.IsNullOrWhiteSpace(x.Value))
+                ? string.Join(Environment.NewLine, ErrorDictionary.Where(x => string.IsNullOrWhiteSpace(x.Value) == false).GetEnumerator().Current)
+                : null;
     }
 }
