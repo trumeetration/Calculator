@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Calculator.Interfaces;
 using Calculator.Models;
+using Calculator.Models.Memory;
 using Expression = Calculator.Models.Expression;
 
 namespace Calculator
@@ -24,7 +25,7 @@ namespace Calculator
         {
             ErrorDictionary = new Dictionary<string, string>();
             _expr = new ObservableCollection<Expression>();
-            Memory = new MemoryRAM();
+            Memory = new MemoryJson();
         }
         private static bool _hasNumberComma = false;
         private static char[] _delimiterChars = { '+', '-', '*', '/' };
@@ -104,7 +105,7 @@ namespace Calculator
             {
                 var value = Calc.Parse(TextValue);
                 TextValue = Convert.ToString(value);
-                Memory.Increase(Memory.Count, TextValue);
+                Memory.Decrease(Memory.Count - 1, TextValue);
             }, () => string.IsNullOrEmpty(TextValue) == false && Memory.Any());
         }
 
