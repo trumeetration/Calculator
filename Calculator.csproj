@@ -58,9 +58,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Interfaces\IHistory.cs" />
     <Compile Include="Interfaces\IMemory.cs" />
     <Compile Include="Models\Calculator.cs" />
     <Compile Include="Models\Expression.cs" />
+    <Compile Include="Models\History\HistoryJson.cs" />
+    <Compile Include="Models\History\HistoryRAM.cs" />
     <Compile Include="Models\Memory\MemoryJson.cs" />
     <Compile Include="Models\Memory\MemoryRAM.cs" />
     <Compile Include="RelayCommand.cs" />

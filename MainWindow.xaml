@@ -45,6 +45,8 @@
             <Button Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Content="⇔" Command="{Binding MemoryUnit}" CommandParameter="{Binding ElementName=MemoryPanel}" Margin="0, 5" FontSize="20"/>
             <Button Grid.Row="0" Grid.Column="4" Content="Clear" Command="{Binding Clear}"
                 Style="{StaticResource HeadButtonStyle}"/>
+            <Button Grid.Row="0" Grid.Column="3" Content="ClearAll" Command="{Binding ClearAll}"
+                    Style="{StaticResource HeadButtonStyle}"/>
             <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="1"
                        Style="{StaticResource TextBlockStyle}"/>
             <Button Grid.Column="1" Grid.Row="2" Content="7" Command="{Binding AddDigit}"
@@ -92,7 +94,7 @@
             </Grid>
             <TabControl Grid.Row="0" Grid.Column="5" Grid.RowSpan="6">
                 <TabItem Header="History">
-                    <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Expressions}">
+                    <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding History.Expressions}">
                         <ListBox.ItemTemplate>
                             <DataTemplate DataType="{x:Type Expression}">
                                 <DockPanel>

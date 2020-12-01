@@ -13,6 +13,7 @@ using System.Windows.Data;
 using System.Windows.Input;
 using Calculator.Interfaces;
 using Calculator.Models;
+using Calculator.Models.History;
 using Calculator.Models.Memory;
 using Expression = Calculator.Models.Expression;
 
@@ -21,10 +22,11 @@ namespace Calculator
     class ViewModel : INotifyPropertyChanged, IDataErrorInfo
     {
         public IMemory Memory { get; }
+        public IHistory History { get; }
         public ViewModel()
         {
             ErrorDictionary = new Dictionary<string, string>();
-            _expr = new ObservableCollection<Expression>();
+            History = new HistoryJson();
             Memory = new MemoryJson();
         }
         private static bool _hasNumberComma = false;
@@ -152,7 +154,7 @@ namespace Calculator
             {
                 var result = Convert.ToString(Calc.Parse(TextValue));
                 Expression tmp = new Expression(TextValue, result);
-                Expressions.Add(tmp); 
+                History.Add(tmp);
                 TextValue = result;
             }, x => string.IsNullOrWhiteSpace(TextValue) == false);
         }
@@ -194,13 +196,9 @@ namespace Calculator
             }, (x) => true);
         }
 
-        private ObservableCollection<Expression> _expr;
-        public ObservableCollection<Expression> Expressions
-        {
-            get => _expr;
-        }
+        
 
-        public Dictionary<string, string> ErrorDictionary { get; private set; }
+        public Dictionary<string, string> ErrorDictionary { get; }
 
         public string this[string columnName] => ErrorDictionary.ContainsKey(columnName) ? ErrorDictionary[columnName] : null;
 
@@ -208,5 +206,16 @@ namespace Calculator
             ErrorDictionary.Any(x => string.IsNullOrWhiteSpace(x.Value))
                 ? string.Join(Environment.NewLine, ErrorDictionary.Where(x => string.IsNullOrWhiteSpace(x.Value) == false).GetEnumerator().Current)
                 : null;
+
+        private ICommand _clearall;
+        public ICommand ClearAll
+        {
+            get => _clearall ?? new RelayCommand(() =>
+            {
+                History.Clear();
+                Memory.Clear();
+                TextValue = "";
+            }, () => true);
+        }
     }
 }
