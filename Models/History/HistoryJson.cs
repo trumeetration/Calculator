@@ -32,7 +32,10 @@ namespace Calculator.Models.History
         public void Clear()
         {
             if (Expressions.Count > 0)
+            {
                 Expressions.Clear();
+                SaveToJson();
+            }
         }
 
         public void SaveToJson()
