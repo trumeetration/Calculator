@@ -186,12 +186,10 @@ namespace Calculator
                 if (x.Visibility == Visibility.Collapsed)
                 {
                     x.Visibility = Visibility.Visible;
-                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width += x.Width;
                 }
                 else
                 {
                     x.Visibility = Visibility.Collapsed;
-                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width -= x.Width;
                 }
             }, (x) => true);
         }

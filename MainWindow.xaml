@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:Calculator"
         Name="MainWin"
         mc:Ignorable="d"
+        SizeToContent="Width"
         Title="Calculator" Height="500" Width="365.6"
         d:DataContext="{d:DesignInstance local:ViewModel}"
         ResizeMode="NoResize">
