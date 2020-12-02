@@ -208,6 +208,7 @@ namespace Calculator
                 : null;
 
         private ICommand _clearall;
+
         public ICommand ClearAll
         {
             get => _clearall ?? new RelayCommand(() =>
@@ -216,6 +217,24 @@ namespace Calculator
                 Memory.Clear();
                 TextValue = "";
             }, () => true);
+        }
+
+        private ICommand _histMemUnit;
+        public ICommand HistoryMemoryUnit
+        {
+            get => _histMemUnit ?? new RelayCommand<TabControl>(x =>
+            {
+                if (x.Visibility == Visibility.Collapsed)
+                {
+                    x.Visibility = Visibility.Visible;
+                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width += x.Width;
+                }
+                else
+                {
+                    x.Visibility = Visibility.Collapsed;
+                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width -= x.Width;
+                }
+            }, x => true);
         }
     }
 }

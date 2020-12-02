@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:Calculator"
         Name="MainWin"
         mc:Ignorable="d"
-        Title="Calculator" Height="500" Width="680"
+        Title="Calculator" Height="500" Width="365.6"
         d:DataContext="{d:DesignInstance local:ViewModel}"
         ResizeMode="NoResize">
-    <DockPanel LastChildFill="False">
+    <DockPanel LastChildFill="False" Margin="0,0,3.2,0.4">
         <DockPanel Name="MemoryPanel" LastChildFill="False" DockPanel.Dock="Left" Visibility="Collapsed" Width="90">
             <Image Source="{StaticResource MetacognitionDrawingImage}" DockPanel.Dock="Top" Margin="0, 20, 0, 0" Height="85" Width="80"></Image>
             <Grid Visibility="Visible" Width="80" VerticalAlignment="Bottom" Margin="0, 0, 0, 25" DockPanel.Dock="Right">
@@ -25,7 +25,33 @@
                 <Button Grid.Row="3" Content="MC" Margin="5" Command="{Binding ClearMemory}"></Button>
             </Grid>
         </DockPanel>
-        <Grid Background="FloralWhite" Margin="10" Width="650">
+        <TabControl DockPanel.Dock="Right" Width="280" Name="HistoryMemoryPanel" Visibility="Collapsed">
+            <TabItem Header="History">
+                <ListBox Margin="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding History.Expressions}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="{x:Type Expression}">
+                            <DockPanel>
+                                <TextBox IsReadOnly="True" Width="180" Text="{Binding Exp, Mode=OneWay}"/>
+                                <TextBox IsReadOnly="True" Width="90" Text="{Binding Value, Mode=OneWay}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+            <TabItem Header="Memory">
+                <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Memory.Memory}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <DockPanel LastChildFill="False">
+                                <TextBox IsReadOnly="True" Width="200" Name="MemoryTextBox" Text="{Binding ., Mode=OneWay}"/>
+                                <Button Content="Take" Width="70" Margin="5, 0" DataContext="{Binding ElementName=MainWin, Path=DataContext}" Command="{Binding TakeExpression}" CommandParameter="{Binding Path=., ElementName=MemoryTextBox}"/>
+                            </DockPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </TabItem>
+        </TabControl>
+        <Grid Background="FloralWhite" Margin="10,10,10,10.4" Width="335">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
                 <RowDefinition Height="80"/>
@@ -40,12 +66,13 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Grid.Row="2" Grid.RowSpan="4" Content="⇔" Command="{Binding MemoryUnit}" CommandParameter="{Binding ElementName=MemoryPanel}" Margin="0, 5" FontSize="20"/>
-            <Button Grid.Row="0" Grid.Column="4" Content="Clear" Command="{Binding Clear}"
+            <Button Grid.Row="0" Grid.Column="3" Content="Clear" Command="{Binding Clear}"
                 Style="{StaticResource HeadButtonStyle}"/>
-            <Button Grid.Row="0" Grid.Column="3" Content="ClearAll" Command="{Binding ClearAll}"
+            <Button Grid.Row="2" Grid.Column="5" Grid.RowSpan="4" Content="⇔" Command="{Binding HistoryMemoryUnit}" CommandParameter="{Binding ElementName=HistoryMemoryPanel}" Margin="0, 5" FontSize="20"/>
+            <Button Grid.Row="0" Grid.Column="4" Content="ClearAll" Command="{Binding ClearAll}"
                     Style="{StaticResource HeadButtonStyle}"/>
             <TextBlock Grid.Row="1" Grid.ColumnSpan="4" Grid.Column="1"
                        Style="{StaticResource TextBlockStyle}"/>
@@ -92,32 +119,7 @@
                 <Button Grid.Row="4"  Content="+" Command="{Binding AddDigit}"
                     Style="{StaticResource ButtonStyle}"/>
             </Grid>
-            <TabControl Grid.Row="0" Grid.Column="5" Grid.RowSpan="6">
-                <TabItem Header="History">
-                    <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding History.Expressions}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate DataType="{x:Type Expression}">
-                                <DockPanel>
-                                    <TextBox IsReadOnly="True" Width="180" Text="{Binding Exp, Mode=OneWay}"/>
-                                    <TextBox IsReadOnly="True" Width="90" Text="{Binding Value, Mode=OneWay}"/>
-                                </DockPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </TabItem>
-                <TabItem Header="Memory">
-                    <ListBox Grid.Column="4" Grid.Row="1" Margin="5" Grid.RowSpan="5" ScrollViewer.HorizontalScrollBarVisibility="Hidden" ItemsSource="{Binding Memory.Memory}">
-                        <ListBox.ItemTemplate>
-                            <DataTemplate>
-                                <DockPanel LastChildFill="False">
-                                    <TextBox IsReadOnly="True" Width="200" Name="MemoryTextBox" Text="{Binding ., Mode=OneWay}"/>
-                                    <Button Content="Take" Width="70" Margin="5, 0" DataContext="{Binding ElementName=MainWin, Path=DataContext}" Command="{Binding TakeExpression}" CommandParameter="{Binding Path=., ElementName=MemoryTextBox}"/>
-                                </DockPanel>
-                            </DataTemplate>
-                        </ListBox.ItemTemplate>
-                    </ListBox>
-                </TabItem>
-            </TabControl>
+
         </Grid>
     </DockPanel>
 </Window>
