@@ -14,8 +14,8 @@ namespace Calculator.Models
             Value = answ;
         }
 
-        public string Value { get; }
+        public string Value { get; set; }
 
-        public string Exp { get; }
+        public string Exp { get; set; }
     }
 }
