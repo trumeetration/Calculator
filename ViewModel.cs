@@ -179,23 +179,6 @@ namespace Calculator
 
         private ICommand _memoryUnit;
 
-        public ICommand MemoryUnit
-        {
-            get => _memoryUnit ?? new RelayCommand<DockPanel>((x) =>
-            {
-                if (x.Visibility == Visibility.Collapsed)
-                {
-                    x.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    x.Visibility = Visibility.Collapsed;
-                }
-            }, (x) => true);
-        }
-
-        
-
         public Dictionary<string, string> ErrorDictionary { get; }
 
         public string this[string columnName] => ErrorDictionary.ContainsKey(columnName) ? ErrorDictionary[columnName] : null;
@@ -225,12 +208,10 @@ namespace Calculator
                 if (x.Visibility == Visibility.Collapsed)
                 {
                     x.Visibility = Visibility.Visible;
-                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width += x.Width;
                 }
                 else
                 {
                     x.Visibility = Visibility.Collapsed;
-                    if (Application.Current.MainWindow != null) Application.Current.MainWindow.Width -= x.Width;
                 }
             }, x => true);
         }
