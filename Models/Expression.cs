@@ -8,6 +8,7 @@ namespace Calculator.Models
 {
     public class Expression
     {
+        public Expression() { }
         public Expression(string exp, string answ)
         {
             Exp = exp;

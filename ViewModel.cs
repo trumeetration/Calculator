@@ -27,7 +27,7 @@ namespace Calculator
         {
             ErrorDictionary = new Dictionary<string, string>();
             History = new HistoryJson();
-            Memory = new MemoryJson();
+            Memory = new MemoryDb();
         }
         private static bool _hasNumberComma = false;
         private static char[] _delimiterChars = { '+', '-', '*', '/' };
