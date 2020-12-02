@@ -10,7 +10,7 @@ namespace Calculator.Models.Memory
     {
         private string path;
         public ObservableCollection<string> Memory { get; }
-        public MemoryJson(string jsonPath = "memoryJson.json")
+        public MemoryJson(string jsonPath = "memory.json")
         {
             path = jsonPath;
             if (File.Exists(path) == false)
