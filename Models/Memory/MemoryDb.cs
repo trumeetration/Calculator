@@ -14,18 +14,18 @@ namespace Calculator.Models.Memory
     class MemoryDb : IMemory
     {
         public ObservableCollection<string> Memory { get; }
+        private string _dbname;
 
         public MemoryDb(string dbname = "calculator.db")
         {
+            _dbname = dbname;
             Memory = Memory ?? new ObservableCollection<string>();
             if (File.Exists(dbname) == false)
             {
                 SQLiteConnection.CreateFile(dbname);
-                using (SQLiteConnection connection = new SQLiteConnection())
+                using (SQLiteConnection connection = new SQLiteConnection("Data Source = " + dbname))
                 {
-                    connection.ConnectionString = "Data Source = " + dbname;
                     connection.Open();
-
                     using (SQLiteCommand command = new SQLiteCommand(connection))
                     {
                         command.CommandText =
@@ -35,8 +35,8 @@ namespace Calculator.Models.Memory
                         command.ExecuteNonQuery();
                         command.CommandText =
                             @"CREATE TABLE expressions (
-                                Exp VARCHAR NOT NULL,
-                                Value VARCHAR NOT NULL)";
+                                expression VARCHAR NOT NULL,
+                                value VARCHAR NOT NULL)";
                         command.CommandType = CommandType.Text;
                         command.ExecuteNonQuery();
                     }
@@ -44,9 +44,8 @@ namespace Calculator.Models.Memory
             }
             else
             {
-                using (SQLiteConnection connection = new SQLiteConnection())
+                using (SQLiteConnection connection = new SQLiteConnection("Data Source = " + dbname))
                 {
-                    connection.ConnectionString = "Data Source = " + dbname;
                     connection.Open();
                     SQLiteCommand command = new SQLiteCommand("SELECT * FROM saved_values", connection);
                     SQLiteDataAdapter adapter = new SQLiteDataAdapter(command);
@@ -60,15 +59,36 @@ namespace Calculator.Models.Memory
             }
 
         }
-        public int Count { get; }
+        public int Count
+        {
+            get => Memory.Count;
+        }
         public void Add(string value)
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source = " + _dbname))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(connection);
+                command.CommandText = @"INSERT INTO saved_values
+                                            VALUES (@tosave)";
+                command.Parameters.AddWithValue("@tosave", value);
+                command.ExecuteNonQuery();
+            }
+            Memory.Add(value);
         }
 
         public void Remove(int index)
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source = " + _dbname))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(connection);
+                command.CommandText = @"DELETE FROM saved_values
+                                        WHERE rowid=@rowid";
+                command.Parameters.AddWithValue("@rowid", index + 1);
+                command.ExecuteNonQuery();
+            }
+            Memory.RemoveAt(index);
         }
 
         public void Increase(int index, string value)
@@ -83,7 +103,15 @@ namespace Calculator.Models.Memory
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source = " + _dbname))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(connection);
+                command.CommandText = @"DELETE FROM saved_values
+                                            WHERE (SELECT * FROM saved_values)";
+                command.ExecuteNonQuery();
+            }
+            Memory.Clear();
         }
 
         public bool Any()
