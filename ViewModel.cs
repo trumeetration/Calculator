@@ -177,8 +177,6 @@ namespace Calculator
             }, () => true);
         }
 
-        private ICommand _memoryUnit;
-
         public Dictionary<string, string> ErrorDictionary { get; }
 
         public string this[string columnName] => ErrorDictionary.ContainsKey(columnName) ? ErrorDictionary[columnName] : null;
@@ -204,6 +202,22 @@ namespace Calculator
         public ICommand HistoryMemoryUnit
         {
             get => _histMemUnit ?? new RelayCommand<TabControl>(x =>
+            {
+                if (x.Visibility == Visibility.Collapsed)
+                {
+                    x.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    x.Visibility = Visibility.Collapsed;
+                }
+            }, x => true);
+        }
+
+        private ICommand _memoryUnit;
+        public ICommand MemoryUnit
+        {
+            get => _histMemUnit ?? new RelayCommand<DockPanel>(x =>
             {
                 if (x.Visibility == Visibility.Collapsed)
                 {
