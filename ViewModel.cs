@@ -26,7 +26,7 @@ namespace Calculator
         public ViewModel()
         {
             ErrorDictionary = new Dictionary<string, string>();
-            History = new HistoryJson();
+            History = new HistoryDb();
             Memory = new MemoryDb();
         }
         private static bool _hasNumberComma = false;
