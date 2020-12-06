@@ -84,7 +84,7 @@ namespace Calculator.Models.Memory
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(connection);
                 command.CommandText = @"DELETE FROM saved_values
-                                        WHERE rowid=@rowid";
+                                            WHERE rowid=@rowid";
                 command.Parameters.AddWithValue("@rowid", index + 1);
                 command.ExecuteNonQuery();
             }
@@ -93,12 +93,12 @@ namespace Calculator.Models.Memory
 
         public void Increase(int index, string value)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); //todo UPDATE saved_values set value = 100 where rowid = 1
         }
 
         public void Decrease(int index, string value)
         {
-            throw new NotImplementedException();
+            throw new NotImplementedException(); //todo UPDATE saved_values set value = 100 where rowid = 1
         }
 
         public void Clear()
