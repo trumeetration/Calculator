@@ -93,12 +93,36 @@ namespace Calculator.Models.Memory
 
         public void Increase(int index, string value)
         {
-            throw new NotImplementedException(); //todo UPDATE saved_values set value = 100 where rowid = 1
+            double newValue = Convert.ToDouble(Memory[index]) + Convert.ToDouble(value);
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source = " + _dbname))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(connection);
+                command.CommandText = @"UPDATE saved_values 
+                                            SET value = @value 
+                                            WHERE rowid = @rowid";
+                command.Parameters.AddWithValue("@rowid", index + 1);
+                command.Parameters.AddWithValue("@value", newValue);
+                command.ExecuteNonQuery();
+            }
+            Memory[index] = newValue.ToString();
         }
 
         public void Decrease(int index, string value)
         {
-            throw new NotImplementedException(); //todo UPDATE saved_values set value = 100 where rowid = 1
+            double newValue = Convert.ToDouble(Memory[index]) - Convert.ToDouble(value);
+            using (SQLiteConnection connection = new SQLiteConnection("Data Source = " + _dbname))
+            {
+                connection.Open();
+                SQLiteCommand command = new SQLiteCommand(connection);
+                command.CommandText = @"UPDATE saved_values 
+                                            SET value = @value 
+                                            WHERE rowid = @rowid";
+                command.Parameters.AddWithValue("@rowid", index + 1);
+                command.Parameters.AddWithValue("@value", newValue);
+                command.ExecuteNonQuery();
+            }
+            Memory[index] = newValue.ToString();
         }
 
         public void Clear()
