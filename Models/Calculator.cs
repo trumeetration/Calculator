@@ -8,12 +8,12 @@ namespace Calculator.Models
 {
     public static class Calc
     {
-        private static List<double> valueList = new List<double>();
-        private static List<char> operators = new List<char>();
         public static double Parse(string expression)
         {
-            valueList.Clear();
-            operators.Clear();
+            List<double> valueList = new List<double>();
+            List<char> operators = new List<char>();
+            //valueList.Clear();
+            //operators.Clear();
             expression = expression.Replace(" ", ""); // Удаляет лишние пробелы
             if (expression.Length == 0)
                 return 0;
@@ -24,6 +24,15 @@ namespace Calculator.Models
             string value = "";
             double total = 0;
             char tmpOp = 'n';
+            while (expression.Contains("(") && expression.Contains(")"))
+            {
+                int start = expression.LastIndexOf('('); //15
+                int end = expression.Substring(start).IndexOf(')') + start; //4
+                expression = expression.Remove(end, 1).Remove(start, 1);
+                string _stringToChange = expression.Substring(start, end - start - 1);
+                double tmpRes = Parse(_stringToChange);
+                expression = expression.Replace(_stringToChange, tmpRes.ToString());
+            }
             while (true) // сбор данных 
             {
                 if (expression.Length == 0)

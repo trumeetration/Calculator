@@ -70,6 +70,21 @@ namespace NUnitTests
             
             var result = Calc.Parse("-           5           +-*    4    *10/10*          ").Should().Be(-20).And.BeNegative("Problemo");
         }
+
+        [Test]
+        public void SingleBrackets()
+        {
+
+            var result = Calc.Parse("5+4-(10+4*2)").Should().Be(-9).And.BeNegative("Problemo");
+        }
+
+        [Test]
+        public void DoubleBrackets()
+        {
+
+            var result = Calc.Parse("5+4-(10+(4*2))+(1+1)").Should().Be(-7).And.BeNegative("Problemo");
+        }
+
     }
 
     
