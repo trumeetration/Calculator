@@ -23,8 +23,10 @@ namespace Calculator
     {
         public IMemory Memory { get; }
         public IHistory History { get; }
+        public ICalculator Calc;
         public ViewModel()
         {
+            Calc = new Calc();
             ErrorDictionary = new Dictionary<string, string>();
             History = new HistoryDb();
             Memory = new MemoryDb();

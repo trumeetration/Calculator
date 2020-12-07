@@ -3,17 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Calculator.Interfaces;
 
 namespace Calculator.Models
 {
-    public static class Calc
+    public class Calc : ICalculator
     {
-        public static double Parse(string expression)
+        public Calc()
+        {
+
+        }
+        public double Parse(string expression)
         {
             List<double> valueList = new List<double>();
             List<char> operators = new List<char>();
-            //valueList.Clear();
-            //operators.Clear();
             expression = expression.Replace(" ", ""); // Удаляет лишние пробелы
             if (expression.Length == 0)
                 return 0;

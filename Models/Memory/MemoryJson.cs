@@ -8,7 +8,7 @@ namespace Calculator.Models.Memory
 {
     public class MemoryJson : IMemory
     {
-        private string path;
+        private readonly string path;
         public ObservableCollection<string> Memory { get; }
         public MemoryJson(string jsonPath = "memory.json")
         {
