@@ -9,5 +9,6 @@ namespace Calculator.Interfaces
     public interface ICalculator
     {
         double Parse(string expression);
+        bool IsValid(string expression);
     }
 }
