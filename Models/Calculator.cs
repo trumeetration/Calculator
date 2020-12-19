@@ -119,7 +119,8 @@ namespace Calculator.Models
                 "/+*-".Contains(expression[expression.Length - 1]) ||
                 Equals(expression[expression.Length - 1], ',') ||
                 expression.Length > 1 && "(".Contains(expression[expression.Length - 1]) && "+-/*(".Contains(expression[expression.Length - 2]) == false ||
-                expression.Length > 1 && "(".Contains(expression[expression.Length - 1]) && "+-/*(".Contains(expression[expression.Length - 2]) == false)
+                expression.Length > 1 && "(".Contains(expression[expression.Length - 1]) && "+-/*(".Contains(expression[expression.Length - 2]) == false ||
+                expression.Count(x => x == '(') != expression.Count(x => x == ')') )
             {
                 return false;
             }
