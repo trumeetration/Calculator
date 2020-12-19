@@ -158,7 +158,7 @@ namespace Calculator
                 Expression tmp = new Expression(TextValue, result);
                 History.Add(tmp);
                 TextValue = result;
-            }, x => string.IsNullOrWhiteSpace(TextValue) == false);
+            }, x => Calc.IsValid(TextValue));
         }
         private ICommand _comma;
         public ICommand Comma
