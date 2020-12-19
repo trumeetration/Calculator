@@ -66,7 +66,7 @@ namespace NUnitTests
         }
 
         [Test]
-        public void Five_Plus_Minus_Multiply_Four_Multiply_Ten_Split_Ten_ShouldReturn_y()
+        public void Minus_Five_Plus_Minus_Multiply_Four_Multiply_Ten_Split_Ten_ShouldReturn_y()
         {
             ICalculator Calc = new Calc();
             var result = Calc.Parse("-           5           +-*    4    *10/10*          ").Should().Be(-20).And.BeNegative("Problemo");
