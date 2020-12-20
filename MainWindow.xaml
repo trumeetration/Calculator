@@ -10,7 +10,30 @@
         Title="Calculator" Height="480" Width="341"
         d:DataContext="{d:DesignInstance local:ViewModel}"
         ResizeMode="NoResize"
-        Background="#323dd8">
+        Background="#323dd8"
+        FontFamily="./Resources/#Comfortaa Light"
+        >
+    <Window.InputBindings>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="Back" Key="Back"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="0" Key="D0"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="1" Key="D1"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="2" Key="D2"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="3" Key="D3"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="4" Key="D4"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="5" Key="D5"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="6" Key="D6"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="7" Key="D7"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="8" Key="D8"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="9" Key="D9"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="(" Key="D9" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter=")" Key="D0" Modifiers="Shift"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="-" Key="Subtract"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="+" Key="Add"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="*" Key="Multiply"/>
+        <KeyBinding Command="{Binding AddDigit}" CommandParameter="/" Key="Divide"/>
+        <KeyBinding Command="{Binding Comma}" CommandParameter="," Key="Separator"/>
+
+    </Window.InputBindings>
     <DockPanel LastChildFill="False">
         <DockPanel Name="MemoryPanel"
                    LastChildFill="False"
@@ -65,7 +88,7 @@
                                 <Border BorderBrush="#0069ff"
                                         BorderThickness="1"
                                         Margin="5"
-                                        Padding="0, 0, 5, 0">
+                                        Padding="0, 5, 5, 0">
                                     <TextBlock
                                         Width="130"
                                         Height="30"
@@ -76,7 +99,7 @@
                                 <Border BorderBrush="#0069ff"
                                         BorderThickness="1"
                                         Margin="5"
-                                        Padding="5, 0, 0, 0">
+                                        Padding="5, 5, 0, 0">
                                     <TextBlock
                                          Width="90"
                                          FontSize="20"
