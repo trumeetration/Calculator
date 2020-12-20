@@ -8,18 +8,15 @@
             <Setter Property="FontFamily" Value="Arial Black"/>
             <Setter Property="Text" Value="{Binding TextValue, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"/>
             <Setter Property="ToolTip" Value=""/>
-            <Setter Property="Margin" Value="5"/>
-            <Setter Property="FontSize" Value="55"/>
-            <Setter Property="Background" Value="#B67291"/>
+            <Setter Property="Foreground" Value="#fafdfc"></Setter>
+            <Setter Property="FontSize" Value="48"/>
+            <Setter Property="TextAlignment" Value="Right"></Setter>
+            <Setter Property="Padding" Value="5, 0"></Setter>
         </Style>
         <Style x:Key="ButtonStyle" TargetType="Button">
             <Setter Property="FontFamily" Value="Arial Black"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="0"/>
             <Setter Property="CommandParameter" Value="{Binding RelativeSource={RelativeSource self}, Path=Content}"/>
-        </Style>
-        <Style x:Key="HeadButtonStyle" TargetType="Button">
-            <Setter Property="FontFamily" Value="Arial Black"/>
-            <Setter Property="Margin" Value="5, 0"/>
         </Style>
         <DrawingImage x:Key="MetacognitionDrawingImage">
             <DrawingImage.Drawing>
