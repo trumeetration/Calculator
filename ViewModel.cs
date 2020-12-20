@@ -116,7 +116,7 @@ namespace Calculator
         private ICommand _takeExp;
         public ICommand TakeExpression
         {
-            get => _takeExp ?? new RelayCommand<TextBox>((x) =>
+            get => _takeExp ?? new RelayCommand<TextBlock>((x) =>
             {
                 TextValue = x.Text;
             }, (x) => true);
