@@ -7,11 +7,11 @@
         Name="MainWin"
         mc:Ignorable="d"
         SizeToContent="Width"
-        Title="Calculator" Height="500" Width="365.6"
+        Title="Calculator" Height="480" Width="341"
         d:DataContext="{d:DesignInstance local:ViewModel}"
-        ResizeMode="NoResize">
-    <DockPanel LastChildFill="False"
-               Margin="0,0,3.2,0.4">
+        ResizeMode="NoResize"
+        Background="#323dd8">
+    <DockPanel LastChildFill="False">
         <DockPanel Name="MemoryPanel"
                    LastChildFill="False"
                    DockPanel.Dock="Left"
@@ -62,12 +62,26 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate DataType="{x:Type Expression}">
                             <DockPanel>
-                                <TextBox IsReadOnly="True"
-                                         Width="180"
-                                         Text="{Binding Exp, Mode=OneWay}"/>
-                                <TextBox IsReadOnly="True"
+                                <Border BorderBrush="#0069ff"
+                                        BorderThickness="1"
+                                        Margin="5"
+                                        Padding="0, 0, 5, 0">
+                                    <TextBlock
+                                        Width="130"
+                                        Height="30"
+                                        FontSize="20"
+                                        Text="{Binding Exp, Mode=OneWay}"
+                                        TextAlignment="Right"/>
+                                </Border>
+                                <Border BorderBrush="#0069ff"
+                                        BorderThickness="1"
+                                        Margin="5"
+                                        Padding="5, 0, 0, 0">
+                                    <TextBlock
                                          Width="90"
+                                         FontSize="20"
                                          Text="{Binding Value, Mode=OneWay}"/>
+                                </Border>
                             </DockPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -80,26 +94,36 @@
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <DockPanel LastChildFill="False">
-                                <TextBox IsReadOnly="True"
-                                         Width="200"
-                                         Name="MemoryTextBox"
+                                <Border BorderBrush="#0069ff"
+                                        BorderThickness="1"
+                                        Margin="5"
+                                        Padding="0, 0, 5, 0">
+                                    <TextBlock
+                                         Width="150"
+                                         Name="MemoryTextBlock"
+                                         FontSize="20"
+                                         TextAlignment="Right"
                                          Text="{Binding ., Mode=OneWay}"/>
-                                <Button Content="Take"
-                                        Width="70"
-                                        Margin="5, 0"
+                                </Border>
+                                <Border
+                                        Margin="5"
+                                        Padding="0, 0, 5, 0">
+                                    <Button Content="Take"
+                                        Width="75"
                                         DataContext="{Binding ElementName=MainWin, Path=DataContext}"
                                         Command="{Binding TakeExpression}"
-                                        CommandParameter="{Binding Path=., ElementName=MemoryTextBox}"/>
+                                        CommandParameter="{Binding ElementName=MemoryTextBlock}"/>
+                                </Border>
                             </DockPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </TabItem>
         </TabControl>
-        <Grid Background="FloralWhite" Margin="10,10,10,10.4" Width="335">
+        <Grid Width="335">
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
-                <RowDefinition Height="80"/>
+                <RowDefinition Height="60"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -119,42 +143,38 @@
                     Content="⇔"
                     Command="{Binding MemoryUnit}"
                     CommandParameter="{Binding ElementName=MemoryPanel}"
-                    Margin="0, 5"
                     FontSize="20"/>
             <Button Grid.Row="0"
                     Grid.Column="3"
                     Content="Clear"
-                    Command="{Binding Clear}"
-                    Style="{StaticResource HeadButtonStyle}"/>
+                    Command="{Binding Clear}"/>
             <Button Grid.Row="0"
                     Grid.Column="1"
                     Content="("
                     Command="{Binding AddDigit}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
-                    Style="{StaticResource HeadButtonStyle}"/>
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             <Button Grid.Row="0"
                     Grid.Column="2"
                     Content=")"
                     Command="{Binding AddDigit}"
-                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"
-                    Style="{StaticResource HeadButtonStyle}"/>
+                    CommandParameter="{Binding RelativeSource={RelativeSource Self}, Path=Content}"/>
             <Button Grid.Row="2"
                     Grid.Column="5"
                     Grid.RowSpan="4"
                     Content="⇔"
                     Command="{Binding HistoryMemoryUnit}"
                     CommandParameter="{Binding ElementName=HistoryMemoryPanel}"
-                    Margin="0, 5"
                     FontSize="20"/>
             <Button Grid.Row="0"
                     Grid.Column="4"
                     Content="ClearAll"
-                    Command="{Binding ClearAll}"
-                    Style="{StaticResource HeadButtonStyle}"/>
-            <TextBlock Grid.Row="1"
-                       Grid.ColumnSpan="4"
-                       Grid.Column="1"
-                       Style="{StaticResource TextBlockStyle}"/>
+                    Command="{Binding ClearAll}"/>
+            <Border Grid.Row="1"
+                    Grid.ColumnSpan="6"
+                    Grid.Column="0">
+                <TextBlock Style="{StaticResource TextBlockStyle}"/>
+            </Border>
+            
             <Button Grid.Column="1"
                     Grid.Row="2"
                     Content="7"
