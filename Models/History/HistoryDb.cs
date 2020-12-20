@@ -79,8 +79,7 @@ namespace Calculator.Models.History
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(connection);
-                command.CommandText = @"DELETE FROM expressions
-                                            WHERE (SELECT * FROM saved_values)";
+                command.CommandText = "DELETE FROM expressions";
                 command.ExecuteNonQuery();
             }
             Expressions.Clear();
