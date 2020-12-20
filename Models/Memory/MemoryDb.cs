@@ -131,8 +131,7 @@ namespace Calculator.Models.Memory
             {
                 connection.Open();
                 SQLiteCommand command = new SQLiteCommand(connection);
-                command.CommandText = @"DELETE FROM saved_values
-                                            WHERE (SELECT * FROM saved_values)";
+                command.CommandText = "DELETE FROM saved_values";
                 command.ExecuteNonQuery();
             }
             Memory.Clear();
