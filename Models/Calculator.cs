@@ -120,15 +120,13 @@ namespace Calculator.Models
                 Equals(expression[expression.Length - 1], ',') ||
                 expression.Length > 1 && "(".Contains(expression[expression.Length - 1]) && "+-/*(".Contains(expression[expression.Length - 2]) == false ||
                 expression.Length > 1 && "(".Contains(expression[expression.Length - 1]) && "+-/*(".Contains(expression[expression.Length - 2]) == false ||
-                expression.Count(x => x == '(') != expression.Count(x => x == ')')
+                expression.Count(x => x == '(') != expression.Count(x => x == ')') ||
+                expression.Contains('(') == false && expression.Contains(')')
                 )
             {
                 return false;
             }
-            else
-            {
-                return true;
-            }
+            return true;
         }
     }
 }
