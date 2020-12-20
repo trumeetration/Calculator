@@ -40,7 +40,7 @@ namespace Calculator.Models
             {
                 if (expression.Length == 0)
                     break;
-                while (expression.Length > 0 && "1234567890".Contains(expression[0]))
+                while (expression.Length > 0 && "1234567890,".Contains(expression[0]))
                 {
                     value += expression[0];
                     expression = expression.Remove(0, 1);
@@ -120,7 +120,8 @@ namespace Calculator.Models
                 Equals(expression[expression.Length - 1], ',') ||
                 expression.Length > 1 && "(".Contains(expression[expression.Length - 1]) && "+-/*(".Contains(expression[expression.Length - 2]) == false ||
                 expression.Length > 1 && "(".Contains(expression[expression.Length - 1]) && "+-/*(".Contains(expression[expression.Length - 2]) == false ||
-                expression.Count(x => x == '(') != expression.Count(x => x == ')') )
+                expression.Count(x => x == '(') != expression.Count(x => x == ')')
+                )
             {
                 return false;
             }
